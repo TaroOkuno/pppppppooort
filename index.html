@@ -19,11 +19,12 @@
             height: 100vh;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            overflow-x: hidden; /* 横スクロールを制御 */
         }
 
         .calculator {
-            max-width: 100%;
-            width: 400px;
+            width: 100%; /* 幅を100%に設定 */
+            max-width: 400px; /* 最大幅を設定 */
             background-color: #333;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -73,9 +74,10 @@
             background-color: #cc7a00;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 400px) {
+            /* 画面幅が400px以下の場合のスタイル */
             .calculator {
-                width: 100%;
+                max-width: 100%; /* 最大幅を100%に設定 */
             }
         }
     </style>
@@ -161,6 +163,24 @@
                     case '÷': return (a / b).toString();
                 }
             }
+
+            // ウィンドウサイズに応じてスタイルを調整する関数
+            function adjustStylesForScreenWidth() {
+                const screenWidth = window.innerWidth;
+                const calculatorElement = document.querySelector('.calculator');
+
+                if (screenWidth <= 400) {
+                    calculatorElement.style.width = '100%';
+                    calculatorElement.style.maxWidth = '100%';
+                } else {
+                    calculatorElement.style.width = '400px';
+                    calculatorElement.style.maxWidth = '400px';
+                }
+            }
+
+            // 初期化およびリサイズ時のイベントハンドラ
+            window.addEventListener('DOMContentLoaded', adjustStylesForScreenWidth);
+            window.addEventListener('resize', adjustStylesForScreenWidth);
 
             // Service Worker の登録
             if ('serviceWorker' in navigator) {
