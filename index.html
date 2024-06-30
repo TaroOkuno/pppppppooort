@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iPad対応電卓</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="/manifest.json">
     <style>
         body {
             display: flex;
@@ -155,6 +156,19 @@
                     case '×': return (a * b).toString();
                     case '÷': return (a / b).toString();
                 }
+            }
+
+            // Service Worker の登録
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                      .then(registration => {
+                          console.log('Service Worker registered: ', registration);
+                      })
+                      .catch(error => {
+                          console.log('Service Worker registration failed: ', error);
+                      });
+                });
             }
         });
     </script>
