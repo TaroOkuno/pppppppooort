@@ -10,25 +10,27 @@
         body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow: hidden; /* スクロールを無効化 */
         }
 
-        body {
+        .calculator-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
-            overflow-x: hidden; /* 横スクロールを制御 */
+            overflow: hidden; /* スクロールを無効化 */
         }
 
         .calculator {
-            width: 100%; /* 幅を100%に設定 */
-            max-width: 400px; /* 最大幅を設定 */
+            width: 100%;
+            max-width: 400px;
             background-color: #333;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden; /* スクロールを制限 */
+            overflow: hidden; /* スクロールを無効化 */
         }
 
         .display {
@@ -54,7 +56,6 @@
             text-align: center;
             cursor: pointer;
             outline: none;
-            touch-action: manipulation; /* タップ時のデフォルトの挙動を制御 */
         }
 
         .button.operator {
@@ -75,36 +76,37 @@
         }
 
         @media (max-width: 400px) {
-            /* 画面幅が400px以下の場合のスタイル */
             .calculator {
-                max-width: 100%; /* 最大幅を100%に設定 */
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">0</div>
-        <div class="buttons">
-            <button class="button clear">C</button>
-            <button class="button">±</button>
-            <button class="button">%</button>
-            <button class="button operator">÷</button>
-            <button class="button">7</button>
-            <button class="button">8</button>
-            <button class="button">9</button>
-            <button class="button operator">×</button>
-            <button class="button">4</button>
-            <button class="button">5</button>
-            <button class="button">6</button>
-            <button class="button operator">-</button>
-            <button class="button">1</button>
-            <button class="button">2</button>
-            <button class="button">3</button>
-            <button class="button operator">+</button>
-            <button class="button zero">0</button>
-            <button class="button">.</button>
-            <button class="button operator">=</button>
+    <div class="calculator-wrapper">
+        <div class="calculator">
+            <div class="display">0</div>
+            <div class="buttons">
+                <button class="button clear">C</button>
+                <button class="button">±</button>
+                <button class="button">%</button>
+                <button class="button operator">÷</button>
+                <button class="button">7</button>
+                <button class="button">8</button>
+                <button class="button">9</button>
+                <button class="button operator">×</button>
+                <button class="button">4</button>
+                <button class="button">5</button>
+                <button class="button">6</button>
+                <button class="button operator">-</button>
+                <button class="button">1</button>
+                <button class="button">2</button>
+                <button class="button">3</button>
+                <button class="button operator">+</button>
+                <button class="button zero">0</button>
+                <button class="button">.</button>
+                <button class="button operator">=</button>
+            </div>
         </div>
     </div>
 
@@ -162,37 +164,6 @@
                     case '×': return (a * b).toString();
                     case '÷': return (a / b).toString();
                 }
-            }
-
-            // ウィンドウサイズに応じてスタイルを調整する関数
-            function adjustStylesForScreenWidth() {
-                const screenWidth = window.innerWidth;
-                const calculatorElement = document.querySelector('.calculator');
-
-                if (screenWidth <= 400) {
-                    calculatorElement.style.width = '100%';
-                    calculatorElement.style.maxWidth = '100%';
-                } else {
-                    calculatorElement.style.width = '400px';
-                    calculatorElement.style.maxWidth = '400px';
-                }
-            }
-
-            // 初期化およびリサイズ時のイベントハンドラ
-            window.addEventListener('DOMContentLoaded', adjustStylesForScreenWidth);
-            window.addEventListener('resize', adjustStylesForScreenWidth);
-
-            // Service Worker の登録
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/service-worker.js')
-                      .then(registration => {
-                          console.log('Service Worker registered: ', registration);
-                      })
-                      .catch(error => {
-                          console.log('Service Worker registration failed: ', error);
-                      });
-                });
             }
         });
     </script>
