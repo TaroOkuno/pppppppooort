@@ -7,19 +7,23 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="/manifest.json">
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
         }
 
         .calculator {
-            max-width: 100%; /* 最大幅を100%に設定 */
-            width: 400px; /* 固定幅を設定（iPadサイズに合わせて調整） */
+            max-width: 100%;
+            width: 400px;
             background-color: #333;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -44,11 +48,12 @@
         .button {
             background-color: #e0e0e0;
             border: none;
-            padding: 30px; /* ボタンのサイズを大きめに調整 */
-            font-size: 1.8em; /* フォントサイズも調整 */
+            padding: 30px;
+            font-size: 1.8em;
             text-align: center;
             cursor: pointer;
             outline: none;
+            touch-action: manipulation; /* タップ時のデフォルトの挙動を制御 */
         }
 
         .button.operator {
@@ -69,9 +74,8 @@
         }
 
         @media (max-width: 600px) {
-            /* 画面幅が600px以下の場合のスタイル */
             .calculator {
-                width: 100%; /* 幅を100%に設定 */
+                width: 100%;
             }
         }
     </style>
